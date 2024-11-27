@@ -3,9 +3,11 @@ use yew_router::prelude::*;
 
 mod components; // Importa componentes
 mod pages;      // Importa páginas
+use components::right_sidebar::RightSidebar;
 
-use components::navbar::Navbar;
-use components::footer::Footer;
+use components::sidebar::Sidebar; // Componente Sidebar
+
+
 use pages::home::Home;
 use pages::about::About;
 use pages::contact::Contact;
@@ -32,12 +34,23 @@ fn switch(routes: AppRoute) -> Html {
 fn app() -> Html {
     html! {
         <BrowserRouter>
-            <div class="min-h-screen flex flex-col">
-                <Navbar /> // Navbar reusable
-                <main class="flex-grow">
-                <Switch<AppRoute> render={switch} />
+            <div class="h-full bg-white flex">
+                // Sidebar izquierda
+                <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-20 lg:flex-col bg-white border-r border-gray-200">
+                    <Sidebar />
+                </div>
+
+                // Contenido principal
+                <main class="flex-1 lg:pl-20 lg:pr-80">
+                    <div class="w-full h-full">
+                        <Switch<AppRoute> render={switch} />
+                    </div>
                 </main>
-                <Footer /> // Footer reusable
+
+                // Sidebar derecha
+                <div class="hidden lg:fixed lg:inset-y-0 lg:right-0 lg:z-50 lg:w-80 bg-white border-l border-gray-200 p-6 overflow-y-auto">
+                    <RightSidebar />
+                </div>
             </div>
         </BrowserRouter>
     }
