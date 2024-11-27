@@ -1,4 +1,4 @@
-pub mod right_sidebar; 
+pub mod rsidebar;
 pub mod sidebar;
 pub mod footer;
 pub mod button; // Asegúrate de agregar esto
